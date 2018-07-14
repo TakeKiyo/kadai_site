@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image:</strong>
+<%= image_tag @product.image,:size =>'150x160'%>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @product.shop %>
+</p>
+
+<%= link_to '商品情報を編集', edit_product_path(@product) %> |
+<%= link_to '一覧に戻る', products_path %>
