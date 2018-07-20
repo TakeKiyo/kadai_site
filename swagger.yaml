@@ -1,0 +1,225 @@
+swagger: "2.0"
+info:
+  description: "API仕様書を書きました"
+  version: "1.0.0"
+  title: "商品API"
+  termsOfService: "http://swagger.io/terms/"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "kadaiecsite.herokuapp.com"
+tags:
+- name: "product"
+  description: "商品情報"
+- name: "shop"
+  description: "店ごとの情報"
+- name: "products"
+  description: "商品一覧"
+schemes:
+- "https"
+- "http"
+paths:
+  /products.json:
+    get:
+      tags:
+      - "products"
+      summary: "商品一覧"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "正常"
+          schema:
+            $ref: "#/definitions/created_products"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/404error"
+    post:
+      tags:
+      - "products"
+      summary: "商品追加"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "product"
+        required: true
+        schema:
+          $ref: "#/definitions/products"
+      responses:
+        201:
+          description: "created"
+          schema:
+            $ref: "#/definitions/401"
+        422:
+          description: "入力エラー"
+          schema:
+            $ref: "#/definitions/422error"
+
+
+  /products/id.json:
+    
+    get:
+      tags:
+      - "product"
+      summary: "商品情報閲覧"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "正常"
+          schema:
+            $ref: "#/definitions/created_products"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/404error"
+
+    delete:
+      tags:
+      - "product"
+      summary: "商品削除"
+      produces:
+      - "application/json"
+      responses:
+        204:
+          description: "No Content"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/404error"
+            
+            
+    put:
+      tags:
+      - "product"
+      summary: "商品情報の変更"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "product"
+        required: true
+        schema:
+          $ref: "#/definitions/products"
+      responses:
+        200:
+          description: "正常"
+          schema:
+            $ref: "#/definitions/created_products"
+        404:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/404error"
+        422:
+          description: "入力エラー"
+          schema:
+            $ref: "#/definitions/422error"
+
+  /shop.json:
+    get:
+      tags:
+      - "shop"
+      summary: "店を表示"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "正常"
+          schema:
+            $ref: "#/definitions/created_products"
+        404:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/404error"
+      
+
+
+definitions:
+  products:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      image:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "integer"
+        format: "int64"
+      shop:
+        type: "string"
+  
+  created_products:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      image:
+        type: "string"
+        format: "uri"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "integer"
+        format: "int64"
+      shop:
+        type: "string"
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+  404error:
+    type: "object"
+    properties:
+      status: 
+        type: "string"
+        example: "404"
+      error:
+        type: "string"
+        example: "Not Found"
+  422error:
+    type: "object"
+    properties:
+      base:
+        type: "array"
+        items: 
+          type: "string"
+          enum: 
+            - "〜を入力してください"
+
+  401:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      image:
+        type: "string"
+        format: "uri"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "integer"
+        format: "int64"
+      shop:
+        type: "string"
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+      url:
+         type: "string"
+         format: "uri"
+    
