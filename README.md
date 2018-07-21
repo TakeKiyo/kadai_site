@@ -24,3 +24,5 @@ https://kadaiecsite.herokuapp.com/
 
 店の検索をする場合、https://kadaiecsite.herokuapp.com/shop?utf8=%E2%9C%93&search=
 の後方に検索する単語をいれると検索することができます。
+
+仕様書は、仕様書スクショというフォルダに、入っています。
